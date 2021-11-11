@@ -1,12 +1,12 @@
-#OPCP9
-##LitReview
+# OPCP9
+## LitReview
 Lit Review is a web app using the Django framework that
 
-###Overview
+### Overview
 
-###Tools Used
+### Tools Used
 
-###Installing & How to use
+### Installing & How to use
 
 
 
