@@ -27,5 +27,6 @@ Verify that Django is installed:
 If it is not installed:
 * pip install django
 
-Then run the script:
+Then got to mysite and run the script:
+* cd mysite
 * python .\manage.py runserver
