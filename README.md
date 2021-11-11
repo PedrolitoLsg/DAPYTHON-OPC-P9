@@ -19,11 +19,14 @@ Clone the repository:
 
 
 Activate the virtual environment:
-* env\Scripts\activate
+```bash
+env\Scripts\activate
+```
 
 Verify that Django is installed:
-* python -m django version
-
+```bash
+python -m django version
+```
 If it is not installed:
 ```bash
 pip install django
