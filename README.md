@@ -31,6 +31,8 @@ pip install django
 
 Then got to mysite and run the script:
 ```bash
-* cd mysite
-* python .\manage.py runserver
+cd mysite
+```
+```bash
+python .\manage.py runserver
 ```
