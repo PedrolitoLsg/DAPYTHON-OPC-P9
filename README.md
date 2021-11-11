@@ -25,8 +25,12 @@ Verify that Django is installed:
 * python -m django version
 
 If it is not installed:
-* pip install django
+```bash
+pip install django
+```
 
 Then got to mysite and run the script:
+```bash
 * cd mysite
 * python .\manage.py runserver
+```
