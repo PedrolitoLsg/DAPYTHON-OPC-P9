@@ -7,7 +7,7 @@ from django.db import models
 
 
 class Ticket(models.Model):
-    date = models.DateTimeField()
+    creationdate = models.DateTimeField(auto_now=True)
     #creator of the ticket = User.id()
     content = models.TextField()
     #product = models.Product.title()
