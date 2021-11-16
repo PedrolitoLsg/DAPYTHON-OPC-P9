@@ -1,0 +1,33 @@
+body {
+    display: flex;
+    flex-direction: column;
+    border: black solid 3px;
+}
+ .banniere {
+    display: flex;
+    border-bottom: black solid 3px;
+    justify-content: space-evenly;
+ }
+
+.choix {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 10px;
+}
+
+#utilisateur {
+    display: flex;
+    flex-direction: column;
+    order : 2;
+    align-items: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+#nouveau {
+    order : 1;
+}
+

@@ -1,6 +1,6 @@
 # OPCP9
 ## LitReview
-Lit Review is a web app using the Django framework that
+Lit Review is a web app using the Django framework allowing users to exchange and publish reviews about books.
 
 ### Overview
 
@@ -30,6 +30,10 @@ python -m django version
 If it is not installed:
 ```bash
 pip install django
+```
+You may also have to install pillow which is a package allowing to manage images:
+```bash
+python -m pip install pillow
 ```
 
 Then got to mysite and run the script:
