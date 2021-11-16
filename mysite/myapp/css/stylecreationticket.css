@@ -1,0 +1,20 @@
+body {
+    display: flex;
+    flex-direction: column;
+    border: black solid 3px;
+}
+ .banniere {
+    display: flex;
+    border-bottom: black solid 3px;
+    justify-content: space-around;
+    align-items: stretch;
+ }
+ #thumbs {
+ order:2;
+ display: flex;
+ align-self: center;
+ }
+ #litreview {
+ order:1;
+ align-self: center;
+ }
