@@ -124,3 +124,8 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+#en dessous d'est la page sur laquelle va etre envoyé l'utilisateur après s'être successfully connected
+LOGIN_REDIRECT_URL = 'flux'
+LOGOUT_REDIRECT_URL = 'deconnexion'

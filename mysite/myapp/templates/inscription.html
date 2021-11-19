@@ -16,8 +16,21 @@
         <input type="text" placeholder="Confirmer mot de passe">
         <section class="buttons">
             <button> Retourner </button>
-            <button> S'inscrire </button>
+            <input> S'inscrire </input>
         </section>
+    </div>
+    <div class="Connexion">
+        <form action="flux/" method="post">
+            {% csrf_token %}
+            <p>
+                <label>Connectez-vous</label>
+            </p>
+            {{ form.username.errors }}
+            {{ form }}
+            <p>
+                <input type="submit" value="Se connecter">
+            </p>
+        </form>
     </div>
 
 </body>

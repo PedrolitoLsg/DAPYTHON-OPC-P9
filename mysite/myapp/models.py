@@ -1,5 +1,3 @@
-from django.db import models
-#here above was what was generated through terminal, under is taken from the models(1) de OPC
 # Create your models here.
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.conf import settings
@@ -36,8 +34,9 @@ class UserFollows(models.Model):
         to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='following')
     followed_user = models.ForeignKey(
         to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='followed_by')
-    #class Meta:
+    class Meta:
         # ensures we don't get multiple UserFollows instances
         # for unique user-user_followed pairs
-        #unique_together = ('user', 'followed_user', )
+        unique_together = ('user', 'followed_user', )
+        pass
     pass

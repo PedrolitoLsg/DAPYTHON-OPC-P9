@@ -19,4 +19,6 @@ from django.urls import path, include
 urlpatterns = [
     path('app/', include('myapp.urls')),
     path('admin/', admin.site.urls),
+    #path('connexion/', auth_views.LoginView.as_view(template_name='connexion.html'), name='connexion'),
+    #path('deconnexion/', auth_views.LogoutView.as_view(template_name='deconnexion.html'), name='deconnexion'),
 ]
