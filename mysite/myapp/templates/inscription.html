@@ -6,31 +6,18 @@
     <title>Inscription</title>
 </head>
 <body>
-    <div class="banniere">
-            <h1>Lit Review</h1>
+    <div class="Title">
+        <h1> Inscription</h1>
     </div>
-    <div class="data">
-        <h1>Inscrivez-vous</h1>
-        <input type="text" placeholder="Nom d'utilisateur">
-        <input type="text" placeholder="Mot de passe">
-        <input type="text" placeholder="Confirmer mot de passe">
-        <section class="buttons">
-            <button> Retourner </button>
-            <input> S'inscrire </input>
-        </section>
-    </div>
-    <div class="Connexion">
-        <form action="flux/" method="post">
+    <div class="Form">
+        <form action="app/flux/" method="post">
             {% csrf_token %}
-            <p>
-                <label>Connectez-vous</label>
-            </p>
-            {{ form.username.errors }}
             {{ form }}
             <p>
                 <input type="submit" value="Se connecter">
             </p>
-        </form>
+            </form>
+        <p> Howdy</p>
     </div>
 
 </body>

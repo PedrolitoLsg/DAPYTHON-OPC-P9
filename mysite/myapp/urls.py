@@ -1,18 +1,18 @@
-from django.urls import path
+#from django.urls import path
+from django.conf.urls import url
 from . import views
 from django.contrib.auth import views as auth_views
 from django.contrib.auth import logout, login
 
-
+app_name = 'app'
 urlpatterns = [
-    path('', views.get_pair_to_connect, name='connexion'),
-    path('inscription/', views.inscription, name='inscription'),
-    path('flux/', views.flux, name='flux'),
-    path('creationticket/', views.creationticket, name='creationticket'),
-    path('creationcritique/', views.creationcritique, name='creationcritique'),
-    path('critiquefromscratch/', views.critiquefromscratch, name='critiquefromscratch'),
-    path('abonnements/', views.abonnements, name='abonnements'),
-    path('main/', views.main, name='main'),
-    #path('connexion/', auth_views.LoginView.as_view(template_name='connexion.html'), name='connexion'),
-    path('deconnexion/', auth_views.LogoutView.as_view(template_name='deconnexion.html'), name='deconnexion'),
+    url(r'^$', views.connexion, name='connexion'),
+    url('inscription/', views.inscription, name='inscription'),
+    url('flux/', views.flux, name='flux'),
+    url('creationticket/', views.creationticket, name='creationticket'),
+    url('creationcritique/', views.creationcritique, name='creationcritique'),
+    url('critiquefromscratch/', views.critiquefromscratch, name='critiquefromscratch'),
+    url('abonnements/', views.abonnements, name='abonnements'),
+    url('posts/', views.posts, name='posts'),
+    url('deconnexion/', views.deconnexion, name='deconnexion'),
 ]

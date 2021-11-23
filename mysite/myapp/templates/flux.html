@@ -2,4 +2,13 @@
 
 {% block content %}
     <h1> this is content inside the block flux</h1>
+    <div class="tickets">
+        {% for ticket in tickets %}
+            <div class="article">
+                <h2><a href="#"> {{ticket.title}}</a></h2>
+                <p>{{ticket.description}}</p>
+                <p>{{ticket.user}}</p>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}

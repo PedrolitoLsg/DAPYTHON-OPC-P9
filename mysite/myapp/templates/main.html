@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="..css/stylemain.css">
-    <link rel="icon" type="image/png" sizes="187x209" href=..images/logo.png">
+    <link rel="icon" type="image/png" sizes="187x209" href="..images/logo.png">
     <title>Lit Review</title>
 </head>
 <body>
@@ -13,10 +13,17 @@ t'es sur le main template
             <h1>Lit Review</h1>
         </section>
         <section id="thumbs">
-            <button onclick="location.href='http://localhost:8000/app/inscription/'">Flux</button>
-            <button onclick="location.href='http://localhost:8000/app/posts/'">Posts</button>
-            <button onclick="location.href='http://localhost:8000/app/abonnements/'">Abonnements</button>
-            <button onclick="location.href='http://localhost:8000/app/deconnexion/'">Se déconnecter</button>
+            <nav>
+                <button onclick="location.href='http://localhost:8000/app/flux/'">Flux</button>
+                <button onclick="location.href='http://localhost:8000/app/posts/'">Posts</button>
+                <button onclick="location.href='http://localhost:8000/app/abonnements/'">Abonnements</button>
+                <li>
+                    <form class="liendeco" action="{% url 'app:deconnexion' %}" method="post">
+                        {% csrf_token%}
+                        <button type="submit">Se déconnecter</button>
+                    </form>
+                </li>
+            </nav>
         </section>
     </div id="content" name="content">
     {% block content %}
