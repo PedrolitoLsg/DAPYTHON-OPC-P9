@@ -3,17 +3,15 @@
 {% block content %}
 
 <h1>Ceci permet de créer une critique en réponse à un ticket</h1>
-<div class="ticket">Ticket en question</p>
-    {% if formticket.instance.id %}
-       <p>Titre: </p>
-        {{ticket.description}}
-        {{ticket.user}}
+<div class="ticket">
+    <p>Ticket:</p>
+    <p>Titre: {{ticket.title}} </p>
+    <p>Description: {{ticket.description}} </p>
+    <p>User: {{ticket.user}} </p>
+    <p>Date: {{ticket.time_created}} </p>
+</div>
 
-    {% else %}
-    <p>La ca veut dire que ton ticket existe pas encore, insérer un form de création ticket</p>
-    {% endif %}
-
-<div class="creationreview">Review Creation</div>
+    <div class="creationreview"><h1>Review Creation</h1></div>
     {% if formreview.instance.id %}
      <p> Insérer un form de création de ticket</p>
 
@@ -22,7 +20,10 @@
             {{ form_review }}
             <input type="submit" value="Publier">
      {% else %}
-
+ <form class="form_review" action="{% url 'app:creationreview' id_ticket%}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+            {{ form_review }}
+            <input type="submit" value="Publier">
      <p>Display le form de review</p>
      {% endif %}
 

@@ -111,8 +111,6 @@ def creationticket(request, id_ticket=None):
             return redirect('app:flux')
 
 
-
-
 @login_required(login_url='app:connexion')
 def deleteticket(request, id_ticket):
     if request.method == "POST":
@@ -130,15 +128,19 @@ def deletereview(request, id_review):
         return redirect('app:posts')
 # End of Page Creation Ticket
 
+
 #Page Creation Critique (permet de créer et modifier une critique)
 @login_required(login_url='app:connexion')
 def creationreview(request, id_review=None, id_ticket=None):
     instance_review = Review.objects.get(pk=id_review) if id_review is not None else None
-    instance_ticket = Ticket.objects.get(pk=id_ticket) if id_ticket is not None else None
+    instance_ticket = Ticket.objects.get(pk=id_ticket)
     if request.method == 'GET':
-        if instance_review is None and instance_ticket is not None:
-            creationreviewnticketexists(request, instance_ticket, instance_review)
-        elif instance_review is not None and instance_ticket is not None:
+        if instance_review is None:
+            form_review = CreateReviewForm()
+            ticket = instance_ticket
+            context = {'ticket': ticket, 'formreview': form_review}
+            return render(request, 'creationcritique.html', context)
+        elif instance_review is not None:
             pass
             # Modifier une review d'un ticket existant, display ticket
             # Entreti
@@ -154,15 +156,6 @@ def creationreview(request, id_review=None, id_ticket=None):
             review = form.save()
             return redirect('app:flux')
 
-@login_required(login_url='app:connexion')
-def creationreviewnticketexists(request, instance_ticket, instance_review):
-    form_review = CreateReviewForm(instance=instance_review)
-    form_ticket = CreateTicketForm(instance=instance_ticket)
-    context = {'formticket': form_ticket, 'formreview': form_review}
-    return render(request, 'creationcritique.html', context)
-
-#End Of Page Creation Critique
-
 
 @login_required(login_url='app:connexion')
 def reviewfromscratch(request):
@@ -171,22 +164,13 @@ def reviewfromscratch(request):
         form_review = CreateReviewForm()
         context = {'formticket': form_ticket, 'formreview': form_review}
         return render(request, 'critiquefromscratch.html', context)
-    else:
-        form_ticket=CreateTicketForm(request.POST)
+    elif request.method == "POST":
+        form_ticket=CreateTicketForm(request.POST, request.FILES)
         form_review=CreateReviewForm(request.POST)
-        print(form_review)
-        print(form_ticket)
-        if form_ticket.is_valid():
-            instance_ticket = form_ticket.save(commit=False)
-            instance_ticket.user = request.user
-            instance_ticket.save()
-            print("ticket saved")
-            if form_review.is_valid():
-                #connecter le review au ticket
-                info = Ticket.objects.latest('time_created')
-                #info = Ticket.objects.all().first()
-                instance_review = form_review.save(commit=False)
-                instance_review.id = info.id
-                instance_review.save()
-                print("formreview id added")
-                return render(request, 'flux.html')
+        if form_ticket.is_valid() and form_review.is_valid():
+            form_ticket.instance.user = request.user
+            new_ticket = form_ticket.save()
+            form_review.instance.user = request.user
+            form_review.instance.ticket = Ticket.objects.get(pk=new_ticket.pk)
+            form_review.save()
+            return redirect('app:flux')
