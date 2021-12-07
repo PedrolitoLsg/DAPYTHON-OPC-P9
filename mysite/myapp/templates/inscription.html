@@ -1,8 +1,8 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../css/styleinscription.css">
     <title>Inscription</title>
 </head>
 <body>
@@ -10,13 +10,11 @@
         <h1> Inscription</h1>
     </div>
     <div class="Form">
-        <form action="app/flux/" method="post">
+        <form action="" method="post">
             {% csrf_token %}
-            {{ form }}
-            <p>
-                <input type="submit" value="Se connecter">
-            </p>
-            </form>
+            {{ formnew }}
+            <input type="submit" value="S'inscrire">
+        </form>
         <p> Howdy</p>
     </div>
 

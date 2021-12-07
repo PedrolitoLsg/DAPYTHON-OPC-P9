@@ -3,4 +3,17 @@
 {% block content %}
     <h1> this is content inside the block abonnements</h1>
     <h1>Ceci permet de gérer les abo</h1>
+    <h1> Ca c'est une barre de recherche ou on entre les noms des utilisateurs qu'on veut suivre</h1>
+    <h1> Liste des abonnements</h1>
+    {% if user_follows %}
+            {% for abonnement in infos %}
+            <li> Personne suivie X : {{ abonnement.followed_user }} </li>
+            {% endfor %}
+    {% else %}
+        <p> Vous n'avez pas d'abonnements</p>
+    {% endif %}
+
+    <h1> Liste des abonnés </h1>
+        <li> Personne abonnée 1</li>
+        <li> Personne abonnée 2 ...</li>
 {% endblock %}

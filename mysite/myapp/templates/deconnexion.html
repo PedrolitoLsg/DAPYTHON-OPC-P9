@@ -1,5 +1,17 @@
-{% extends 'main.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Logout</title>
+    <link rel="stylesheet" href="css/styleaccueil.css">
+</head>
+<body>
+    <div class="banniere">
+        <button><a href="{% url 'app:connexion' %}"> Page d'accueil</a></button>
+        <h1>You disconnected from Lit Review</h1>
+        <h2> A bientôt</h2>
 
-{% block content %}
-    <h1> You successfully disconnected from the LitReview Website, See you soon.</h1>
-{% endblock %}
+    </div>
+</body>
+</html>
+

@@ -1,14 +1,37 @@
 {% extends 'main.html' %}
 
 {% block content %}
-    <h1> this is content inside the block flux</h1>
+    <div class="ticket/reviewbuttons">
+        <button><a href="{% url 'app:creationticket' %}">Créer Ticket</a></button>
+        <button><a href="{% url 'app:reviewfromscratch'%}"> Créer Critique</a></button>
+
+    </div>
     <div class="tickets">
+        <h1>Tickets</h1>
         {% for ticket in tickets %}
             <div class="article">
-                <h2><a href="#"> {{ticket.title}}</a></h2>
-                <p>{{ticket.description}}</p>
-                <p>{{ticket.user}}</p>
+                <h1>Titre : {{ticket.title}}</h1>
+                <p>Apercu : {{ticket.apercu}}</p>
+                <p>Créateur : {{ticket.user}}</p>
+                <p> Image : </p>
+                <p> Id : {{ticket.id}}</p>
+                <p> Pk : {{ticket.pk}}</p>
+                <form action="{% url 'app:creationreview' id_ticket=ticket.id %}">
+                    <button type="submit"> Answer Review</button>
+                </form>
             </div>
         {% endfor %}
+    </div>
+
+    <div class="reviews">
+        <h1> Reviews</h1>
+        {% if reviews %}
+            {% for review in reviews %}
+                <h1> Ticket lié : {{ review.ticket }}</h1>
+                <p> Rating : {{ review.rating }}</p>
+            {% endfor %}
+        {% else %}
+            <p> Aucune review à afficher </p>
+        {% endif %}
     </div>
 {% endblock %}

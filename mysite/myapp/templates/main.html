@@ -2,8 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="..css/stylemain.css">
-    <link rel="icon" type="image/png" sizes="187x209" href="..images/logo.png">
     <title>Lit Review</title>
 </head>
 <body>
@@ -12,24 +10,25 @@ t'es sur le main template
         <section id="litreview">
             <h1>Lit Review</h1>
         </section>
-        <section id="thumbs">
-            <nav>
-                <button onclick="location.href='http://localhost:8000/app/flux/'">Flux</button>
-                <button onclick="location.href='http://localhost:8000/app/posts/'">Posts</button>
-                <button onclick="location.href='http://localhost:8000/app/abonnements/'">Abonnements</button>
-                <li>
+            <section id="thumbs">
+                <nav>
+                    <button><a href="{% url 'app:flux' %}">Flux</a></button>
+                    <button><a href="{% url 'app:posts' %}">Posts</a></button>
+                    <button> <a href="{% url 'app:abonnements' %}">Abonnements</a></button>
                     <form class="liendeco" action="{% url 'app:deconnexion' %}" method="post">
                         {% csrf_token%}
-                        <button type="submit">Se déconnecter</button>
+                        <button type="submit" value="deconnexion">Se déconnecter</button>
                     </form>
-                </li>
-            </nav>
-        </section>
+                </nav>
+            </section>
     </div id="content" name="content">
     {% block content %}
-    <div>
 
-    </div>
     {% endblock %}
+
+    <div class="footer">
+        <p> Bande de footers:</p>
+        <p> OPC-DA-PYTHON- Pierre Lesage December 2021</p>
+    </div>
 </body>
 </html>

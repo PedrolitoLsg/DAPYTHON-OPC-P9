@@ -1,5 +1,6 @@
 # Create your models here.
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.contrib.auth.models import User
 from django.conf import settings
 from django.db import models
 
@@ -15,6 +16,9 @@ class Ticket(models.Model):
 
     def __str__(self):
         return self.title
+
+    def apercu(self):
+        return self.description[:80] + "..."
 
 
 class Review(models.Model):
@@ -41,5 +45,9 @@ class UserFollows(models.Model):
         # for unique user-user_followed pairs
         unique_together = ('user', 'followed_user', )
         pass
+    '''
+    def __str__(self):
+        return self.followed_user
     pass
+    '''
 

@@ -1,10 +1,15 @@
 {% extends 'main.html' %}
 
 {% block content %}
-    <h1> this is content inside the block creation ticket</h1>
-<h1>Créer un Ticket</h1>
-        <label for="titre">Titre</label>
-        <input type="text" id="titre">
-        <label for="description">Description</label>
-        <input type="text" id="description">
+<div class="Create-ticket">
+    {% if form.instance.id %}
+        <form class="form_ticket" action="{% url 'app:creationticket' id_ticket=form.instance.id %}" method="post" enctype="multipart/form-data">
+        {% else %}
+            <form class="form_ticket" action="{% url 'app:creationticket' %}" method="post" enctype="multipart/form-data">
+                {% endif %}
+                {% csrf_token %}
+            {{ form }}
+            <input type="submit" value="Publier">
+        </form>
+    </div>
 {% endblock %}
