@@ -45,9 +45,3 @@ class UserFollows(models.Model):
         # for unique user-user_followed pairs
         unique_together = ('user', 'followed_user', )
         pass
-    '''
-    def __str__(self):
-        return self.followed_user
-    pass
-    '''
-

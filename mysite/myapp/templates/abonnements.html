@@ -1,19 +1,29 @@
 {% extends 'main.html' %}
 
 {% block content %}
-    <h1> this is content inside the block abonnements</h1>
+<div class="search">
     <h1>Ceci permet de gérer les abo</h1>
     <h1> Ca c'est une barre de recherche ou on entre les noms des utilisateurs qu'on veut suivre</h1>
+    <form action="{% url 'app:abonnements' %}" method="post"><button type="submit"> Follow</button>
+        {% csrf_token %}
+        {{form}}
+    </form>
+
+</div>
+    <div class="listsubs">
     <h1> Liste des abonnements</h1>
-    {% if user_follows %}
-            {% for abonnement in infos %}
-            <li> Personne suivie X : {{ abonnement.followed_user }} </li>
+    {% if collection %}
+            {% for elem in collection %}
+                <li> {{ elem.followed_user }} </li>
+                <p> {{ elem.followed_user.id }}</p>
+                <p>Créer un bouton de Unfollow</p>
+                <form action="{% url 'app:unfollow' id_user=elem.followed_user.id %}" method="post"><button type="submit"> Unfollow</button>
+                           {% csrf_token %}
+                </form>
             {% endfor %}
     {% else %}
         <p> Vous n'avez pas d'abonnements</p>
     {% endif %}
+        </div>
 
-    <h1> Liste des abonnés </h1>
-        <li> Personne abonnée 1</li>
-        <li> Personne abonnée 2 ...</li>
 {% endblock %}

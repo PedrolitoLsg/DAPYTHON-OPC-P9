@@ -12,19 +12,10 @@
 </div>
 
     <div class="creationreview"><h1>Review Creation</h1></div>
-    {% if formreview.instance.id %}
      <p> Insérer un form de création de ticket</p>
-
- <form class="form_review" action="{% url 'app:creationreview' id_ticket%}" method="post" enctype="multipart/form-data">
+        <form class="form_review" action="{% url 'app:creationreview' id_ticket=ticket.id%}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-            {{ form_review }}
-            <input type="submit" value="Publier">
-     {% else %}
- <form class="form_review" action="{% url 'app:creationreview' id_ticket%}" method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-            {{ form_review }}
-            <input type="submit" value="Publier">
-     <p>Display le form de review</p>
-     {% endif %}
-
+                {{ formreview }}
+            <input type="submit" value="Save">
+        </form>
 {% endblock %}

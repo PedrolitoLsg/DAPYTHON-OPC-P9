@@ -16,9 +16,7 @@
                 <p> Image : </p>
                 <p> Id : {{ticket.id}}</p>
                 <p> Pk : {{ticket.pk}}</p>
-                <form action="{% url 'app:creationreview' id_ticket=ticket.id %}" method="GET">
-                    <button type="submit"> Answer Review</button>
-                </form>
+                <button><a href="{% url 'app:creationreview' id_ticket=ticket.id %}">Answer Review</a></button>
             </div>
         {% endfor %}
     </div>

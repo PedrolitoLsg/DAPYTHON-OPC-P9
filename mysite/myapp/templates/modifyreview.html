@@ -1,0 +1,23 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<h1>Ceci permet de modifier une critique en réponse à un ticket</h1>
+<div class="ticket">
+    <p>Ticket:</p>
+    <p>Titre: {{ticket.title}} </p>
+    <p>Description: {{ticket.description}} </p>
+    <p>User: {{ticket.user}} </p>
+    <p>Date: {{ticket.time_created}} </p>
+</div>
+
+<div class="creationreview"><h1>Review Creation</h1>
+
+ <form class="form_review" action="{% url 'app:modifyreview' id_review=instance_review.id %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+            {{ form_review }}
+            <input type="submit" value="Publier">
+ </form>
+</div>
+
+{% endblock %}
