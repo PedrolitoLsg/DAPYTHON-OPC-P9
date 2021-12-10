@@ -8,9 +8,6 @@ from itertools import chain
 from django.urls import reverse
 
 
-#from models import Ticket, Review, UserFollows
-
-
 def deconnexion(request):
     if request.method == 'POST':
         logout(request)
@@ -62,21 +59,60 @@ def abonnements(request):
 @login_required(login_url='app:connexion')
 def unfollow(request, id_user):
     if request.method == 'POST':
-        #recupère le nom du user à unfollow, chercher l'objet UserFollows où user= request.user et user_followed=id_user
         relation = UserFollows.objects.get(user=request.user, followed_user=id_user)
         if relation:
             relation.delete()
     return redirect('app:abonnements')
 
 
-#Flux page
+# Flux page
 @login_required(login_url="app:connexion")
 def flux(request):
-    #doit contenir les derniers tickets et reviews des utilisateurs suivis, Last In on Top
+    users = UserFollows.objects.filter(user=request.user)
     tickets = Ticket.objects.all()
-    reviews = Review.objects.all()
-    context = {'tickets': tickets, 'reviews': reviews}
-    return render(request, 'flux.html', context)
+    tickets.annotate(content_type=Value('TICKET', CharFiels()))
+    list_user = []
+    reviews = []
+    list_user.append(request.user)
+    for user in users:
+        list_user.append(user.followed_user)
+        reviews.append(Review.objects.filter(user=user))
+    reviews = reviews.annotate(content_type=Value('REVIEW', CharFiels()))
+
+    #tickets = récupérer les data qui sont soit user appartient à list_user
+
+    posts = sorted(chain(reviews, tickets), key=mabda post: post.time_created, reverse=True)
+    return render(request, 'flux.html', {'posts': posts})
+
+
+
+
+
+#####EXEMPLE FRAME
+def feed(request):
+    reviews = get_users_viewable_reviews(request.user)
+    # returns queryset of reviews
+    reviews = reviews.annotate(content_type=Value('REVIEW', CharField()))
+    tickets = get_users_viewable_tickets(request.user)
+    # returns queryset of tickets
+    tickets = tickets.annotate(content_type=Value('TICKET', CharField()))
+    # combine and sort the two types of posts
+    posts = sorted(
+    chain(reviews, tickets),
+    key=lambda post: post.time_created,
+    reverse=True
+    )
+    return render(request, 'feed.html', context={'posts': posts})
+
+# in feed.html
+# Use the 'include' tag to reuse ticket and review elements between pages
+...
+{% for post in posts %}
+{% if post.content_type == 'TICKET' %}
+{% include 'ticket_snippet.html' %}
+{% elif post.content_type == 'REVIEW' %}
+{% include 'review_snippet.html' %}
+{% endfor %}
 
 
 @login_required(login_url='app:connexion')
@@ -85,6 +121,7 @@ def posts(request):
     reviews = Review.objects.filter(user=request.user)
     context = {'tickets': tickets, "reviews": reviews}
     return render(request, 'posts.html', context)
+
 
 @login_required(login_url='app:connexion')
 def creationticket(request, id_ticket=None):
@@ -119,7 +156,7 @@ def deletereview(request, id_review):
 # End of Page Creation Ticket
 
 
-#Page Creation Critique (permet de créer et modifier une critique)
+# Page Creation Critique (permet de créer et modifier une critique)
 @login_required(login_url='app:connexion')
 def creationreview(request, id_ticket):
     instance_ticket = Ticket.objects.get(pk=id_ticket) if id_ticket is not None else None
@@ -139,7 +176,7 @@ def creationreview(request, id_ticket):
 
 @login_required(login_url='app:connexion')
 def reviewfromscratch(request):
-    if request.method =="GET":
+    if request.method == "GET":
         form_ticket = CreateTicketForm()
         form_review = CreateReviewForm()
         context = {'formticket': form_ticket, 'formreview': form_review}
@@ -162,7 +199,7 @@ def modifyreview(request, id_review):
     if request.method == 'GET':
         form_review = CreateReviewForm(instance=instance_review)
         context = {'form_review': form_review}
-        return render(request, 'modifyreview.html', {'form_review': form_review})
+        return render(request, 'modifyreview.html', context)
     elif request.method == 'POST':
         form = CreateReviewForm(request.POST)
         if form.is_valid():

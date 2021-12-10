@@ -3,15 +3,16 @@
 {% block content %}
 <div class="search">
     <h1>Ceci permet de gérer les abo</h1>
-    <h1> Ca c'est une barre de recherche ou on entre les noms des utilisateurs qu'on veut suivre</h1>
-    <form action="{% url 'app:abonnements' %}" method="post"><button type="submit"> Follow</button>
+    <h1> Follow someone new ! </h1>
+    <form action="{% url 'app:abonnements' %}" method="post">
         {% csrf_token %}
         {{form}}
+        <button type="submit"> Follow</button>
     </form>
 
 </div>
     <div class="listsubs">
-    <h1> Liste des abonnements</h1>
+    <h1> Users that you are currently Following</h1>
     {% if collection %}
             {% for elem in collection %}
                 <li> {{ elem.followed_user }} </li>
