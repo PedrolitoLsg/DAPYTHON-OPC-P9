@@ -1,9 +1,11 @@
 {% extends 'main.html' %}
-
+{% load static %}
+{% block extrahead %}
+<link rel="stylesheet" href="{% static 'css/styleabonnement.css' %}">
+{% endblock %}
 {% block content %}
+<h1> Follow someone new ! </h1>
 <div class="search">
-    <h1>Ceci permet de gérer les abo</h1>
-    <h1> Follow someone new ! </h1>
     <form action="{% url 'app:abonnements' %}" method="post">
         {% csrf_token %}
         {{form}}
@@ -11,16 +13,16 @@
     </form>
 
 </div>
+<h1> Users you are currently following</h1>
     <div class="listsubs">
-    <h1> Users that you are currently Following</h1>
     {% if collection %}
             {% for elem in collection %}
-                <li> {{ elem.followed_user }} </li>
-                <p> {{ elem.followed_user.id }}</p>
-                <p>Créer un bouton de Unfollow</p>
+                <div class="user">
+                <p> {{ elem.followed_user }} </p>
                 <form action="{% url 'app:unfollow' id_user=elem.followed_user.id %}" method="post"><button type="submit"> Unfollow</button>
                            {% csrf_token %}
                 </form>
+                    </div>
             {% endfor %}
     {% else %}
         <p> Vous n'avez pas d'abonnements</p>

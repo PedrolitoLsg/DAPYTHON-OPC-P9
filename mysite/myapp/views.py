@@ -5,6 +5,8 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from .models import Ticket, Review, UserFollows
 from itertools import chain
+from django.db.models import Value, CharField
+from django.db import models
 from django.urls import reverse
 
 
@@ -70,18 +72,18 @@ def unfollow(request, id_user):
 def flux(request):
     users = UserFollows.objects.filter(user=request.user)
     tickets = Ticket.objects.all()
-    tickets.annotate(content_type=Value('TICKET', CharFiels()))
+    tickets = tickets.annotate(content_type=Value('TICKET', CharField()))
     list_user = []
     reviews = []
     list_user.append(request.user)
-    for user in users:
-        list_user.append(user.followed_user)
-        reviews.append(Review.objects.filter(user=user))
-    reviews = reviews.annotate(content_type=Value('REVIEW', CharFiels()))
-
+    for individual in users:
+        list_user.append(individual.followed_user)
+        indiv_reviews = Review.objects.filter(user=individual.followed_user)
+        indiv_reviews.annotate(content_type=Value('REVIEW', CharField()))
+        reviews.append(indiv_reviews)
     #tickets = récupérer les data qui sont soit user appartient à list_user
-
-    posts = sorted(chain(reviews, tickets), key=mabda post: post.time_created, reverse=True)
+    posts = sorted(chain(tickets, reviews), key=lambda post: post.time_created, reverse=True)
+    #posts = sorted(chain(reviews, tickets), key=lambda post: post.time_created, reverse=True)
     return render(request, 'flux.html', {'posts': posts})
 
 
@@ -104,15 +106,7 @@ def feed(request):
     )
     return render(request, 'feed.html', context={'posts': posts})
 
-# in feed.html
-# Use the 'include' tag to reuse ticket and review elements between pages
-...
-{% for post in posts %}
-{% if post.content_type == 'TICKET' %}
-{% include 'ticket_snippet.html' %}
-{% elif post.content_type == 'REVIEW' %}
-{% include 'review_snippet.html' %}
-{% endfor %}
+
 
 
 @login_required(login_url='app:connexion')

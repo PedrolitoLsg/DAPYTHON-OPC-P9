@@ -1,15 +1,21 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Logout</title>
-    <link rel="stylesheet" href="css/styleaccueil.css">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/logo.png' %}">
+    <link rel="stylesheet" href="css/styledeconnexion.css">
 </head>
 <body>
     <div class="banniere">
-        <button><a href="{% url 'app:connexion' %}"> Page d'accueil</a></button>
+        <section id="litreview">
+                <img src="{% static 'images/logo.png' %}" alt="Logo Lit Review">
+        </section>
+
         <h1>You disconnected from Lit Review</h1>
-        <h2> A bientôt</h2>
+        <h2> See you Soon</h2>
+        <button><a href="{% url 'app:connexion' %}"> Back to signup </a></button>
 
     </div>
 </body>

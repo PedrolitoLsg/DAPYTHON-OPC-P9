@@ -1,26 +1,29 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Lit Review</title>
+    <link rel="stylesheet" href="{% static 'css/stylemain.css' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/logo.png' %}">
+    {% block extrahead %}
+    {% endblock %}
 </head>
 <body>
 
     <div class="banniere">
         <section id="litreview">
-            <h1>Lit Review</h1>
+            <img src="{% static 'images/logo.png' %}" alt="Logo Lit Review">
         </section>
-            <section id="thumbs">
-                <nav>
-                    <button><a href="{% url 'app:flux' %}">Flux</a></button>
-                    <button><a href="{% url 'app:posts' %}">Posts</a></button>
-                    <button> <a href="{% url 'app:abonnements' %}">Abonnements</a></button>
-                    <form class="liendeco" action="{% url 'app:deconnexion' %}" method="post">
+        <section id="thumbs">
+                <button><a href="{% url 'app:flux' %}">Flux</a></button>
+                <button><a href="{% url 'app:posts' %}">Posts</a></button>
+                <button> <a href="{% url 'app:abonnements' %}">Abonnements</a></button>
+                <form class="liendeco" action="{% url 'app:deconnexion' %}" method="post">
                         {% csrf_token%}
                         <button type="submit" value="deconnexion">Se déconnecter</button>
-                    </form>
-                </nav>
-            </section>
+                </form>
+        </section>
     </div>
     {% block content %}
 

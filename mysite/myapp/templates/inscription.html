@@ -1,21 +1,25 @@
-
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Inscription</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/logo.png' %}">
+    <link rel="stylesheet" href="{% static 'css/styleinscription.css' %}">
 </head>
 <body>
-    <div class="Title">
-        <h1> Inscription</h1>
+    <section id="litreview">
+                <img src="{% static 'images/logo.png' %}" alt="Logo Lit Review">
+        </section>
+    <div class="title">
+        <h1> Create an Account</h1>
     </div>
-    <div class="Form">
+    <div class="form">
         <form action="" method="post">
             {% csrf_token %}
             {{ formnew }}
-            <input type="submit" value="S'inscrire">
+            <input type="submit" value="Register">
         </form>
-        <p> Howdy</p>
     </div>
 
 </body>

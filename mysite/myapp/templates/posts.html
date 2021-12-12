@@ -1,36 +1,41 @@
 {% extends 'main.html' %}
-
+{% load static %}
+{% block extrahead %}
+<link rel="stylesheet" href="{% static 'css/styleposts.css' %}">
+{% endblock %}
 {% block content %}
-<div>
-    <h1> POSTS POSTS POSTS POSTS POSTS</h1>
+<div class="title">
+    <h1> Your Tickets and Reviews</h1>
 </div>
 <div class="postsperso">
     {% if tickets %}
         {% for ticket in tickets %}
-                <p> Titre : {{elem.title}} </p>
+            <div class="data">
+                <h2> Ticket : {{ticket.title}} </h2>
                 <p> Description : {{ticket.description}} </p>
-                <p> Crée le: {{ticket.time_created}} </p>
+                <p> Datetime: {{ticket.time_created}} </p>
                     <button> <a href="{% url 'app:creationticket' id_ticket=ticket.id %}">Modify Ticket</a></button>
                    <form action="{% url 'app:deleteticket' id_ticket=ticket.id %}" method="post"><button type="submit"> Delete ticket</button>
                        {% csrf_token %}
                    </form>
+            </div>
         {% endfor %}
     {% if reviews %}
         {% for review in reviews %}
-                <h1> Review number: {{review.id}}</h1>
-                <li> Linked to ticket : {{ review.ticket }}</li>
-                <li> Review: {{review.rating}}</li>
-                <li> Headline: {{review.headline}}</li>
-                <button><a href="{% url 'app:modifyreview' id_review=review.id %}">Modify Review</a></button>
-                <form action="{% url 'app:deletereview' id_review=review.id %}" method="POST">
-                    <button type="submit">Delete Review</button>
-                    {% csrf_token %}
+            <div class="data">
+                    <h2> Review: {{review.ticket}}</h2>
+                    <li> Review: {{review.rating}}</li>
+                    <li> Headline: {{review.headline}}</li>
+                    <li> Creation: {{review.time_created}}</li>
+                    <button><a href="{% url 'app:modifyreview' id_review=review.id %}">Modify Review</a></button>
+                    <form action="{% url 'app:deletereview' id_review=review.id %}" method="POST">
+                        <button type="submit">Delete Review</button>
+                        {% csrf_token %}
                     </form>
-            {% endfor %}
-        {% endif %}
+            </div>
+        {% endfor %}
     {% else %}
         <h1> Vous n'avez pas créé de critiques ou tickets</h1>
     {% endif %}
 </div>
-
 {% endblock %}
