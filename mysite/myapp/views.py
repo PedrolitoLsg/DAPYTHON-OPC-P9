@@ -69,21 +69,50 @@ def unfollow(request, id_user):
 
 # Flux page
 @login_required(login_url="app:connexion")
-def flux(request):
+def fluxa(request):
     users = UserFollows.objects.filter(user=request.user)
+    name_list = list(users.followed_user)
     tickets = Ticket.objects.all()
     tickets = tickets.annotate(content_type=Value('TICKET', CharField()))
     list_user = []
-    reviews = []
+    #reviews = []
     list_user.append(request.user)
-    for individual in users:
-        list_user.append(individual.followed_user)
-        indiv_reviews = Review.objects.filter(user=individual.followed_user)
-        indiv_reviews.annotate(content_type=Value('REVIEW', CharField()))
-        reviews.append(indiv_reviews)
+    reviews = Review.objects.filter(user__in=name_list)
+    #for individual in users:
+        #list_user.append(individual.followed_user)
+        #indiv_reviews = Review.objects.filter(user=individual.followed_user)
+        #indiv_reviews.annotate(content_type=Value('REVIEW', CharField()))
+        #reviews.append(indiv_reviews)
     #tickets = récupérer les data qui sont soit user appartient à list_user
     posts = sorted(chain(tickets, reviews), key=lambda post: post.time_created, reverse=True)
     #posts = sorted(chain(reviews, tickets), key=lambda post: post.time_created, reverse=True)
+    return render(request, 'flux.html', {'posts': posts})
+
+@login_required(login_url="app:connexion")
+def flux(request):
+    x = request.user
+    followed_users = UserFollows.objects.filter(user=x)
+    followed = []
+    for user in followed_users:
+        followed.append(user.followed_user.id)
+
+    # get tickets
+    user_ticket = Ticket.objects.filter(user=x)
+    user_ticket = user_ticket.annotate(content_type=Value('TICKET', CharField()))
+    followers_tickets = Ticket.objects.filter(pk__in=followed)
+    followers_tickets = followers_tickets.annotate(content_type=Value('TICKET', CharField()))
+    # get reviews
+    user_reviews = Review.objects.filter(user=x)
+    user_reviews = user_reviews.annotate(content_type=Value('REVIEW', CharField()))
+    followers_reviews = Review.objects.filter(pk__in=followed)
+    followers_reviews = followers_reviews.annotate(content_type=Value('REVIEW', CharField()))
+
+    for ticket in user_ticket:
+        for review in user_reviews:
+            if review.ticket == ticket:
+                ticket.already_reviewed = True
+
+    posts = sorted(chain(user_ticket, followers_tickets, user_reviews, followers_reviews), key=lambda post: post.time_created, reverse=True)
     return render(request, 'flux.html', {'posts': posts})
 
 

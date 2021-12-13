@@ -13,20 +13,24 @@
             <div class="data">
                 <h2> Ticket : {{ticket.title}} </h2>
                 <p> Description : {{ticket.description}} </p>
-                <p> Datetime: {{ticket.time_created}} </p>
+                <img src="{% static 'image/{{ticket.image}}' %}" alt="{{ticket.title}}">
+                <p> {{ticket.time_created}} </p>
                     <button> <a href="{% url 'app:creationticket' id_ticket=ticket.id %}">Modify Ticket</a></button>
                    <form action="{% url 'app:deleteticket' id_ticket=ticket.id %}" method="post"><button type="submit"> Delete ticket</button>
                        {% csrf_token %}
                    </form>
             </div>
         {% endfor %}
+    {% else %}
+        <h2> You haven't created any Tickets yet</h2>
+    {% endif %}
     {% if reviews %}
         {% for review in reviews %}
             <div class="data">
                     <h2> Review: {{review.ticket}}</h2>
-                    <li> Review: {{review.rating}}</li>
-                    <li> Headline: {{review.headline}}</li>
-                    <li> Creation: {{review.time_created}}</li>
+                    <p> Review: {{review.rating}}</p>
+                    <p> Headline: {{review.headline}}</p>
+                    <p> {{review.time_created}}</p>
                     <button><a href="{% url 'app:modifyreview' id_review=review.id %}">Modify Review</a></button>
                     <form action="{% url 'app:deletereview' id_review=review.id %}" method="POST">
                         <button type="submit">Delete Review</button>
@@ -35,7 +39,7 @@
             </div>
         {% endfor %}
     {% else %}
-        <h1> Vous n'avez pas créé de critiques ou tickets</h1>
+        <h1> You haven't created any review yet.</h1>
     {% endif %}
 </div>
 {% endblock %}

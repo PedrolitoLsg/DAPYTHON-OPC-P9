@@ -7,40 +7,13 @@
 
     </div>
 {% for post in posts %}
-{% if post.content_type == 'TICKET' %}
-{% include 'ticket_snippet.html' %}
-{% elif post.content_type == 'REVIEW' %}
-{% include 'review_snippet.html' %}
-{% endif %}
+    {% if post.content_type == 'TICKET' %}
+        {% include 'ticket_snippet.html' %}
+    {% elif post.content_type == 'REVIEW' %}
+        {% include 'review_snippet.html' %}
+    {% endif %}
 {% endfor %}
 
 
-
-
-    <div class="tickets">
-        <h1>Tickets</h1>
-        {% for ticket in tickets %}
-            <div class="article">
-                <h1>Titre : {{ticket.title}}</h1>
-                <p>Apercu : {{ticket.apercu}}</p>
-                <p>Créateur : {{ticket.user}}</p>
-                <p> Image : </p>
-                <p> Id : {{ticket.id}}</p>
-                <p> Pk : {{ticket.pk}}</p>
-                <button><a href="{% url 'app:creationreview' id_ticket=ticket.id %}">Answer Review</a></button>
-            </div>
-        {% endfor %}
-    </div>
-
-    <div class="reviews">
-        <h1> Reviews</h1>
-        {% if reviews %}
-            {% for review in reviews %}
-                <h1> Ticket lié : {{ review.ticket }}</h1>
-                <p> Rating : {{ review.rating }}</p>
-            {% endfor %}
-        {% else %}
-            <p> Aucune review à afficher </p>
-        {% endif %}
     </div>
 {% endblock %}

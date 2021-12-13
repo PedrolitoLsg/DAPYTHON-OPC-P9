@@ -5,14 +5,15 @@
     <meta charset="UTF-8">
     <title>Logout</title>
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/logo.png' %}">
-    <link rel="stylesheet" href="css/styledeconnexion.css">
+    <link rel="stylesheet" href="{% static 'css/styledeconnexion.css' %}">
 </head>
 <body>
     <div class="banniere">
         <section id="litreview">
                 <img src="{% static 'images/logo.png' %}" alt="Logo Lit Review">
         </section>
-
+    </div>
+    <div class="message">
         <h1>You disconnected from Lit Review</h1>
         <h2> See you Soon</h2>
         <button><a href="{% url 'app:connexion' %}"> Back to signup </a></button>
