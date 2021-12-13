@@ -1,0 +1,29 @@
+{% load static %}
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Connexion</title>
+  <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/logo.png' %}">
+    <link rel="stylesheet" href="{% static 'css/styleaccueil.css' %}">
+</head>
+<body>
+    <section id="litreview">
+                <img src="{% static 'images/logo.png' %}" alt="Logo Lit Review">
+    </section>
+    <section class="welcomemsg">
+        <h1>Welcome to Lit Review where Reviews are Lit</h1>
+    </section>
+    <section class="connect">
+        <form action="" method="post">
+                {% csrf_token %}
+                {{ form }}
+            <input type="submit" value="SignIn">
+        </form>
+    </section>
+    <section class="create">
+        <h3> New to our Website, create an account hereunder</h3>
+        <button id="buttonnew"onclick="location.href='http://localhost:8000/app/inscription/'">Create an account</button>
+    </section>
+</body>
+</html>

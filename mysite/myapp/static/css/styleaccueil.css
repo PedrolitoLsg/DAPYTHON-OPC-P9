@@ -1,0 +1,32 @@
+.body {
+    display: flex;
+    flex-direction: column;
+}
+
+.welcomemsg {
+    display:flex;
+    justify-content: center;
+}
+.banniere {
+    display: flex;
+    border-bottom: black solid 3px;
+    justify-content: space-evenly;
+ }
+
+.connect {
+    display: flex;
+    flex-direction: column;
+}
+
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.create {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}

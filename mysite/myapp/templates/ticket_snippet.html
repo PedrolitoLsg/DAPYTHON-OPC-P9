@@ -1,0 +1,15 @@
+<div class="ticketsnippet">
+    <h2>Ticket:</h2>
+    <p>Ticket Title : {{post.title}}</p>
+    <p> Description : {{post.description}}</p>
+    {% if post.image %}
+        <div>
+            <img src={{post.image.url}}>
+        </div>
+    {% endif %}
+    <p> By {{post.user}} at {{post.time_created}}</p>
+    {% if post.already_reviewed %}
+    {% else %}
+        <button><a href="{% url 'app:creationreview' id_ticket=post.id %}">Answer Review</a></button>
+    {% endif %}
+</div>

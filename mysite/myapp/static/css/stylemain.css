@@ -1,0 +1,24 @@
+body {
+    display: flex;
+    flex-direction: column;
+    }
+
+.banniere {
+    display: flex;
+    flex-direction: row;
+}
+
+#litreview {
+    flex-grow: 1;
+}
+#thumbs {
+    display:flex;
+    flex-grow: 4;
+    align-items : flex-end;
+
+}
+
+footer {
+    color: black;
+    font-weight: Italic;
+}

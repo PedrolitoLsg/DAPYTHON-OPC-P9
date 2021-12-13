@@ -1,0 +1,15 @@
+.search {
+    display: flex;
+    justify-content: center;
+}
+
+.listsubs {
+    display: flex;
+    flex-direction : row;
+}
+
+.user {
+    display: flex;
+    flex-direction : column;
+    padding: 5px;
+}
