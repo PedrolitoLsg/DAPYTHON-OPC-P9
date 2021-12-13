@@ -24,4 +24,4 @@ urlpatterns = [
     path('abonnements/', views.abonnements, name='abonnements'),
     path('unfollow/<id_user>', views.unfollow, name='unfollow'),
     path('deconnexion/', views.deconnexion, name='deconnexion'),
-] #+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+]
