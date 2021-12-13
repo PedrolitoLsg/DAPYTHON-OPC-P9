@@ -8,8 +8,8 @@
             <form class="form_ticket" action="{% url 'app:creationticket' %}" method="post" enctype="multipart/form-data">
                 {% endif %}
                 {% csrf_token %}
-            {{ form }}
-            <input type="submit" value="Publier">
+                {{ form }}
+                <button type="submit">Save</button>
         </form>
     </div>
 {% endblock %}

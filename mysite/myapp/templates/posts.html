@@ -13,7 +13,9 @@
             <div class="data">
                 <h2> Ticket : {{ticket.title}} </h2>
                 <p> Description : {{ticket.description}} </p>
+                {% if ticket.image %}
                 <img src={{ticket.image.url}} alt="{{ticket.title}}">
+                {% endif %}
                 <p> {{ticket.time_created}} </p>
                     <button> <a href="{% url 'app:creationticket' id_ticket=ticket.id %}">Modify Ticket</a></button>
                    <form action="{% url 'app:deleteticket' id_ticket=ticket.id %}" method="post"><button type="submit"> Delete ticket</button>

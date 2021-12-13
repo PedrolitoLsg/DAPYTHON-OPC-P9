@@ -18,10 +18,10 @@
         <section id="thumbs">
                 <button><a href="{% url 'app:flux' %}">Flux</a></button>
                 <button><a href="{% url 'app:posts' %}">Posts</a></button>
-                <button> <a href="{% url 'app:abonnements' %}">Abonnements</a></button>
+                <button> <a href="{% url 'app:abonnements' %}">Follow</a></button>
                 <form class="liendeco" action="{% url 'app:deconnexion' %}" method="post">
                         {% csrf_token%}
-                        <button type="submit" value="deconnexion">Se déconnecter</button>
+                        <button type="submit" value="deconnexion">Logout</button>
                 </form>
         </section>
     </div>

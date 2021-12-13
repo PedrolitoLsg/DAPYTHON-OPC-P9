@@ -69,26 +69,6 @@ def unfollow(request, id_user):
 
 # Flux page
 @login_required(login_url="app:connexion")
-def fluxa(request):
-    users = UserFollows.objects.filter(user=request.user)
-    name_list = list(users.followed_user)
-    tickets = Ticket.objects.all()
-    tickets = tickets.annotate(content_type=Value('TICKET', CharField()))
-    list_user = []
-    #reviews = []
-    list_user.append(request.user)
-    reviews = Review.objects.filter(user__in=name_list)
-    #for individual in users:
-        #list_user.append(individual.followed_user)
-        #indiv_reviews = Review.objects.filter(user=individual.followed_user)
-        #indiv_reviews.annotate(content_type=Value('REVIEW', CharField()))
-        #reviews.append(indiv_reviews)
-    #tickets = récupérer les data qui sont soit user appartient à list_user
-    posts = sorted(chain(tickets, reviews), key=lambda post: post.time_created, reverse=True)
-    #posts = sorted(chain(reviews, tickets), key=lambda post: post.time_created, reverse=True)
-    return render(request, 'flux.html', {'posts': posts})
-
-@login_required(login_url="app:connexion")
 def flux(request):
     x = request.user
     followed_users = UserFollows.objects.filter(user=x)

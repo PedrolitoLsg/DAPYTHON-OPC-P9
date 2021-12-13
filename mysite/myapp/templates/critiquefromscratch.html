@@ -1,7 +1,7 @@
 {% extends 'main.html' %}
 
 {% block content %}
-    <h1> this is content inside the creation de critique from scratch</h1>
+<div class="content">
     <h1>This allows to create a review and a Ticket at the same time</h1>
     <form action="{% url 'app:reviewfromscratch' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
@@ -9,4 +9,5 @@
         {{ formreview }}
         <button type="submit"> Save </button>
     </form>
+</div>
 {% endblock %}
