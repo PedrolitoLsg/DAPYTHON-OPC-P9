@@ -111,7 +111,7 @@ def creationticket(request, id_ticket=None):
         form = CreateTicketForm(instance=instance_ticket)
         return render(request, 'creationticket.html', {'form': form})
     elif request.method == 'POST':
-        form = CreateTicketForm(request.POST, instance=instance_ticket)
+        form = CreateTicketForm(request.POST, request.FILES, instance=instance_ticket)
         if form.is_valid():
             instance = form.save(commit=False)
             instance.user = request.user
