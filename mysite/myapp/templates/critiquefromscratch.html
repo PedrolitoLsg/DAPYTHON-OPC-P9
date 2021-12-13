@@ -3,7 +3,7 @@
 {% block content %}
     <h1> this is content inside the creation de critique from scratch</h1>
     <h1>This allows to create a review and a Ticket at the same time</h1>
-    <form action="{% url 'app:reviewfromscratch' %}" method="post">
+    <form action="{% url 'app:reviewfromscratch' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ formticket }}
         {{ formreview }}
