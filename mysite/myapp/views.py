@@ -74,17 +74,16 @@ def flux(request):
     followed_users = UserFollows.objects.filter(user=x)
     followed = []
     for user in followed_users:
-        followed.append(user.followed_user.id)
-
+        followed.append(user.followed_user)
     # get tickets
     user_ticket = Ticket.objects.filter(user=x)
     user_ticket = user_ticket.annotate(content_type=Value('TICKET', CharField()))
-    followers_tickets = Ticket.objects.filter(pk__in=followed)
+    followers_tickets = Ticket.objects.filter(user__in=followed)
     followers_tickets = followers_tickets.annotate(content_type=Value('TICKET', CharField()))
     # get reviews
     user_reviews = Review.objects.filter(user=x)
     user_reviews = user_reviews.annotate(content_type=Value('REVIEW', CharField()))
-    followers_reviews = Review.objects.filter(pk__in=followed)
+    followers_reviews = Review.objects.filter(user__in=followed)
     followers_reviews = followers_reviews.annotate(content_type=Value('REVIEW', CharField()))
 
     for ticket in user_ticket:
