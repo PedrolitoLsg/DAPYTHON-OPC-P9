@@ -4,14 +4,13 @@ Lit Review is a web app using the Django framework allowing users to exchange an
 
 ### Overview
 
-objectif du projet: construire un site permettant à des utilisateurs de se connecter/créer un compte et d'échanger à propos de produits. 
-Création d'un fil d'actualité
-Gestion de base de données sqlLite
+Goal: Building a network with a database where users can register, post data and review data from the users they follow.
+      Data Management with sqlite
+      Creation of a feed algorithm
 
 
 ### Tools Used
-Python avec le framework Django
-Front avec ?
+Python with the Django Framework
 
 ### Installing & How to use
 
@@ -35,11 +34,16 @@ You may also have to install pillow which is a package allowing to manage images
 ```bash
 python -m pip install pillow
 ```
+If you want to be sure about the requirements in the shell run:
+```bash
+pip install -r requirements.txt
+```
 
-Then got to mysite and run the script:
+Then got to mysite folder:
 ```bash
 cd mysite
 ```
+Run the script:
 ```bash
 python .\manage.py runserver
 ```
