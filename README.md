@@ -47,3 +47,8 @@ Run the script:
 ```bash
 python .\manage.py runserver
 ```
+
+
+SuperUser:
+asimov
+trantor34
