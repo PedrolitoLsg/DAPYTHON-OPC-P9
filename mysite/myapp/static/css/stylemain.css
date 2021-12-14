@@ -18,7 +18,22 @@ body {
 
 }
 
-footer {
+
+.ticketsnippet {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.reviewsnippet {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.footer {
+    display: flex;
+    align-items: center;
     color: black;
     font-weight: Italic;
 }
