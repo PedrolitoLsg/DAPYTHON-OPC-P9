@@ -49,6 +49,11 @@ python .\manage.py runserver
 ```
 
 
+Models Used (app.models.py):
+For the authentication the User model is the one used is the native-one of Django
+The other objects used are Ticket, Reviews and UserFollows.
+
+
 SuperUser:
 asimov
 trantor34
